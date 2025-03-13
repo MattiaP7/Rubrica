@@ -1,0 +1,3 @@
+C:/Users/matti/OneDrive - I.I.S. Bassi-Burgatti/anno scolastico 2024 2025 4n/informatica/Rubrica/build/CMakeFiles/rubrica.dir
+C:/Users/matti/OneDrive - I.I.S. Bassi-Burgatti/anno scolastico 2024 2025 4n/informatica/Rubrica/build/CMakeFiles/edit_cache.dir
+C:/Users/matti/OneDrive - I.I.S. Bassi-Burgatti/anno scolastico 2024 2025 4n/informatica/Rubrica/build/CMakeFiles/rebuild_cache.dir
