@@ -5,5 +5,7 @@
 obj/
 
 # Eseguibile
-*exe
-*csv
+*.exe
+
+# File CSV
+*.csv
