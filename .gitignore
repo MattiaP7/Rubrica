@@ -1,0 +1,9 @@
+# Cartelle da ignorare
+-p/
+.git/
+.vscode/
+obj/
+
+# Eseguibile
+main.exe
+

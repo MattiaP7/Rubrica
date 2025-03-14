@@ -1,6 +1,0 @@
-# ninja log v6
-46	602	7630814576117581	build.ninja	8dbf0927dc75241f
-82	1700	7630813583121841	CMakeFiles/rubrica.dir/main.cpp.obj	dff28f0c0b89ad4b
-60	1869	7630813582889862	CMakeFiles/rubrica.dir/src/utils.cpp.obj	d9cc9517390bf69
-45	1951	7630813582735240	CMakeFiles/rubrica.dir/src/rubrica.cpp.obj	e697b7648d5df19a
-1952	2351	7630813601799755	bin/rubrica.exe	423923ce0f29e20
