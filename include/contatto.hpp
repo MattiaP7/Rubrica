@@ -1,56 +1,71 @@
 #ifndef CONTATTO_HPP
 #define CONTATTO_HPP
 
-
 #pragma once
 #include <string>
 
 /**
- * @brief Classe `Contatto`, rappresenta il contatto nella rubrica
- *
+ * @class Contatto
+ * @brief Classe che rappresenta un contatto nella rubrica.
  */
 class Contatto {
 private:
-    std::string nome_completo;
-    std::string telefono;
-    std::string email;
+    std::string nome_completo; ///< Nome completo del contatto
+    std::string telefono;      ///< Numero di telefono del contatto
+    std::string email;         ///< Indirizzo email del contatto
 
 public:
-    /// @brief costruttore di default
+    /**
+     * @brief Costruttore di default della classe Contatto.
+     */
     Contatto();
 
-    /// @brief metodo per inserire i valori del contatto
+    /**
+     * @brief Metodo per inserire i dati del contatto tramite input utente.
+     */
     void inserisci();
 
-    /// @brief metodo per stampare i dati di un contatto
+    /**
+     * @brief Metodo per stampare i dati del contatto a schermo.
+     */
     void print() const;
 
-    /// @brief metodo che permette la modifica dei dati di un contatto tramite un menu di scelta
+    /**
+     * @brief Metodo per modificare i dati di un contatto tramite un menu interattivo.
+     */
     void modifica();
 
-    // tutti i getter, servono a ritornare i dati effettivi del contatto
-
+    /**
+     * @brief Restituisce il nome completo del contatto.
+     * @return const std::string& Nome del contatto.
+     */
     const std::string& get_nome() const;
+
+    /**
+     * @brief Restituisce il numero di telefono del contatto.
+     * @return const std::string& Numero di telefono.
+     */
     const std::string& get_telefono() const;
+
+    /**
+     * @brief Restituisce l'indirizzo email del contatto.
+     * @return const std::string& Indirizzo email.
+     */
     const std::string& get_email() const;
 
     /**
-     * @brief metodo che ritorna una stirnga costituita dai dati del contatto
-     *
-     * @return std::string
+     * @brief Converte i dati del contatto in formato CSV (stringa separata da virgole).
+     * @return std::string Rappresentazione CSV del contatto.
      */
     std::string to_csv() const;
 
     /**
-     * @brief metodo che carica i dati da un file CSV e gli inserisci in una struttura dati
-     * 1 - Legge il file `contatti.csv`
-     * 2 - Estraee i dati
-     * 3 - Crea oggetti "Contatto" e gli aggiunge alla struttura dati
+     * @brief Carica i dati di un contatto da una stringa CSV.
      *
-     * @param line
+     * Il metodo estrae le informazioni dalla stringa e le assegna ai membri della classe.
+     * @param line Stringa contenente i dati del contatto in formato CSV.
      */
     void from_csv(const std::string& line);
 };
 
-
-#endif
+#endif // CONTATTO_HPP

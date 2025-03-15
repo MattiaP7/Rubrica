@@ -81,15 +81,22 @@ void List::find() const {
     std::getline(std::cin, nome_completo);
 
     Nodo* tmp = head;
-    while (head) {
+    bool trovato = false;
+
+    while (tmp) {
         if (tmp->contatto.get_nome() == nome_completo) {
             tmp->contatto.print();
-            return;
+            trovato = true;
+            break;
         }
         tmp = tmp->next;
     }
-    std::cout << "Contatto non trovato\n";
+
+    if (!trovato) {
+        std::cout << "Contatto non trovato\n";
+    }
 }
+
 
 void List::erase() {
     std::string nome;
@@ -150,20 +157,33 @@ constexpr size_t List::get_size() { return M_size; }
 
 void List::modifica() {
     std::string nome;
-    std::cout << "Nome del contatto da modificare: ";
-    std::getline(std::cin, nome);
+    Nodo* temp = nullptr;
 
-    Nodo* temp = head;
-    while (temp) {
-        if (temp->contatto.get_nome() == nome) {
-            temp->contatto.modifica();
-            salva_su_file();
+    do {
+        std::cout << "Nome del contatto da modificare (0 per annullare): ";
+        std::getline(std::cin, nome);
+
+        if (nome == "0") {
+            std::cout << "Operazione annullata.\n";
             return;
         }
-        temp = temp->next;
-    }
-    std::cout << "Contatto non trovato.\n";
+
+        temp = head;
+        while (temp) {
+            if (temp->contatto.get_nome() == nome) {
+                temp->contatto.modifica();
+                salva_su_file();
+                std::cout << "Contatto modificato con successo e salvato su file.\n";
+                return;
+            }
+            temp = temp->next;
+        }
+
+        std::cout << "Contatto non trovato. Riprova.\n";
+    } while (true);
 }
+
+
 
 void List::salva_su_file() const {
     std::ofstream file("contatti.csv");

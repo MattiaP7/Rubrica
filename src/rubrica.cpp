@@ -5,12 +5,12 @@ void Rubrica::Applicazione() {
     int scelta;
     do {
         std::cout << "\n--- Rubrica ---\n";
-        std::cout << "1. Aggiungi contatto\n";
-        std::cout << "2. Mostra contatti\n";
-        std::cout << "3. Cerca contatto\n";
-        std::cout << "4. Modifica contatto\n";
-        std::cout << "5. Elimina contatto\n";
-        std::cout << "0. Esci\n";
+        std::cout << "1 - Aggiungi contatto\n";
+        std::cout << "2 - Mostra contatti\n";
+        std::cout << "3 - Cerca contatto\n";
+        std::cout << "4 - Modifica contatto\n";
+        std::cout << "5 - Elimina contatto\n";
+        std::cout << "0 - Esci\n";
         std::cout << "Scelta: ";
         std::cin >> scelta;
         std::cin.ignore();
@@ -22,7 +22,7 @@ void Rubrica::Applicazione() {
         case 4: lista.modifica(); break;
         case 5: lista.erase(); break;
         case 0: std::cout << "Uscita...\n"; break;
-        default: std::cout << "Scelta non valida.\n";
+        default: if (scelta != 0) { std::cout << "Scelta non valida.\n"; } break;
         }
     } while (scelta != 0);
 }

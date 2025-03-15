@@ -5,64 +5,100 @@
 #include "contatto.hpp"
 
 /**
- * @brief strutta per rappresentare un nodo della lista
- *
+ * @struct Nodo
+ * @brief Struttura che rappresenta un nodo della lista concatenata.
  */
 struct Nodo {
-    Contatto contatto;
-    Nodo* next;
+    Contatto contatto; ///< Contatto memorizzato nel nodo
+    Nodo* next;        ///< Puntatore al nodo successivo nella lista
 
+    /**
+     * @brief Costruttore di default del nodo.
+     *
+     * Inizializza il puntatore `next` a `nullptr`.
+     */
     Nodo();
 };
 
 /**
- * @brief classe List
- *
+ * @class List
+ * @brief Classe che implementa una lista concatenata per gestire i contatti della rubrica.
  */
 class List {
 private:
-    Nodo* head; // puntatore alla testa della lista
+    Nodo* head; ///< Puntatore alla testa della lista
+    size_t M_size = 0; ///< Numero di elementi presenti nella lista
 
     /**
-     * @brief quando si crea/elimina un contatto viene chiamato questo metodo che aggiorna il file .csv
+     * @brief Salva i dati della lista su un file CSV.
      *
+     * Questo metodo viene chiamato automaticamente quando si aggiunge, modifica o rimuove un contatto.
      */
     void salva_su_file() const;
-    size_t M_size = 0; // tiene traccia della grandezza della lisat
 
 public:
-    /// @brief costruttore di default
+    /**
+     * @brief Costruttore di default della lista.
+     *
+     * Inizializza la lista come vuota.
+     */
     List();
-    /// @brief distruttore di default
+
+    /**
+     * @brief Distruttore della lista.
+     *
+     * Libera la memoria deallocando tutti i nodi della lista.
+     */
     ~List();
 
-    /// @brief metodo per l'inserimento in testa di un nodo nella lista, verifica che non ci siano nodi uguali e fa un inserimento ordinato
+    /**
+     * @brief Inserisce un nuovo contatto nella lista in ordine alfabetico.
+     *
+     * Se il contatto esiste già, non viene inserito.
+     */
     void push();
 
-    /// @brief metodo che mostra tutti i contatti della rubrica
+    /**
+     * @brief Mostra tutti i contatti presenti nella rubrica.
+     */
     void mostra() const;
 
-    /// @brief metodo per cercare un contatto nella rubrica
+    /**
+     * @brief Cerca un contatto nella rubrica per nome.
+     *
+     * Se il contatto viene trovato, i suoi dati vengono stampati a schermo.
+     */
     void find() const;
 
-    /// @brief metodo per eliminare un contatto della rubrica
+    /**
+     * @brief Elimina un contatto dalla rubrica.
+     *
+     * Chiede all'utente il nome del contatto da eliminare e lo rimuove dalla lista.
+     */
     void erase();
 
-    /// @brief metodo che elimina tutti i contatti uguali
+    /**
+     * @brief Rimuove i contatti duplicati presenti nella lista.
+     */
     void unique();
 
-    /// @brief metodo per ritornare la dimensione della lista
-    /// @return size_t - grandezza della lista
+    /**
+     * @brief Restituisce il numero di contatti presenti nella lista.
+     * @return size_t Numero di elementi nella lista.
+     */
     constexpr size_t get_size();
 
-    /// @brief metodo per modifica un conttatto della rubrica
+    /**
+     * @brief Modifica i dati di un contatto esistente.
+     *
+     * Chiede all'utente quale contatto modificare e aggiorna i dati.
+     */
     void modifica();
 
     /**
-     * @brief metodo che carica i dati del file csv alla lista
-     *
+     * @brief Carica i contatti da un file CSV e li inserisce nella lista.
      */
     void carica_da_file();
 };
 
-#endif
+#endif // LISTA_HPP

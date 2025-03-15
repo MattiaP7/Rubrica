@@ -75,8 +75,11 @@ void Contatto::modifica() {
         std::cout << "1 - Modifica il nome\n";
         std::cout << "2 - Modifica il numero di telefono\n";
         std::cout << "3 - Modifica la email\n";
+        std::cout << "0 - Uscire dal menu\n";
 
-        std::cout << "Scelta: "; std::cin >> scelta;
+        std::cout << "Scelta: ";
+        std::cin >> scelta;
+        std::cin.ignore();
 
         switch (scelta)
         {
@@ -95,6 +98,9 @@ void Contatto::modifica() {
             std::getline(std::cin, email);
             break;
         }
+        case 0:
+            std::cout << "Uscita...\n";
+            break;
         default:
             if (scelta != 0) {
                 std::cout << "Opzione inesistente, riprova\n";
