@@ -1,28 +1,29 @@
 #include "../include/utils.hpp"
+#include <iomanip>
+#include <iostream>
 
-bool isEmail(const std::string &email){
-    auto position = email.find('@');
-    if(position == std::string::npos) return false;
 
-    std::string domain = email.substr(position + 1);
-    std::vector<std::string> allowed_domains = {
-        "gmail.com",      "outlook.com",   "yahoo.com",     "hotmail.com",
-        "icloud.com",     "aol.com",       "zoho.com",      "protonmail.com",
-        "yandex.com",     "mail.com",      "gmx.com",       "live.com",
-        "inbox.com",      "fastmail.com",  "icloud.com",    "rocketmail.com",
-        "rediffmail.com", "cox.net",       "earthlink.net", "att.net",
-        "verizon.net",    "sbcglobal.net", "ymail.com",     "me.com",
-        "msn.com",        "bluewin.ch",    "t-online.de",   "web.de",
-        "libero.it",      "alice.it",      "tin.it"
-    };
-    bool valid_domain = false;
+std::vector<int> calcolaLarghezze(const std::vector<std::vector<std::string>>& dati) {
+    size_t colonne = dati[0].size();
+    std::vector<int> larghezze(colonne, 0);
 
-    for(const std::string &allowed_domain : allowed_domains){
-        if(domain == allowed_domain){
-            valid_domain = true;
-            break;
+    for (const auto& riga : dati) {
+        for (size_t i = 0; i < colonne; i++) {
+            larghezze[i] = std::max(larghezze[i], static_cast<int>(riga[i].size()));
         }
     }
+    return larghezze;
+}
 
-    return valid_domain;
+std::string centraTesto(const std::string& testo, int larghezza) {
+    int spazioSinistra = (larghezza - testo.size()) / 2;
+    int spazioDestra = larghezza - testo.size() - spazioSinistra;
+    return std::string(spazioSinistra, ' ') + testo + std::string(spazioDestra, ' ');
+}
+
+void stampaSeparatore(const std::vector<int>& larghezze) {
+    for (int w : larghezze) {
+        std::cout << "+-" << std::string(w, '-') << "-";
+    }
+    std::cout << "+\n";
 }

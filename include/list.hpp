@@ -88,6 +88,12 @@ public:
      */
     constexpr size_t get_size();
 
+
+    /**
+     * @brief Ordina i contatti nella rubrica in ordine alfabetico per nome.
+     */
+    void sort();
+
     /**
      * @brief Modifica i dati di un contatto esistente.
      *

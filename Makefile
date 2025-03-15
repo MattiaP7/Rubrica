@@ -2,7 +2,7 @@
 
 CXX = g++
 CXXFLAGS = -std=c++20 -Wall -Wextra
-SRC = main.cpp src/contatto.cpp src/list.cpp src/rubrica.cpp
+SRC = main.cpp src/contatto.cpp src/list.cpp src/rubrica.cpp src/utils.cpp
 TARGET = main
 
 all: $(TARGET)

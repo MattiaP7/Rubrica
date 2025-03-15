@@ -1,27 +1,69 @@
-/**
- * @file utils.hpp
- * @brief questo file racchiude funzioni wrapper, come verifica della email,
- * telefono.
- */
-
-
 #ifndef UTILS_HPP
 #define UTILS_HPP
 
-#pragma once
-#include <cctype>
-#include <iostream>
 #include <string>
 #include <vector>
+#include <iomanip>
+#include <iostream>
+
 
 /**
- * @brief Funzione ausiliare per controllare se una stringa (email) sia una valida email. Per "valida email" intendo una stringa con `@` e seguita da un dominio come `gmail.com`.
- * 
- * @param email stringa da controllare
- * @return true - se valida
- * @return false - se invalida
+ * @brief Calcola la larghezza delle colonne in base ai dati passati.
+ *
+ * @param dati Vettore bidimensionale contenente i dati(in stringa) della tabella.
+ * @return std::vector<int> Vettore contenente la larghezza di ciascuna colonna.
  */
-bool isEmail(const std::string& email);
+std::vector<int> calcolaLarghezze(const std::vector<std::vector<std::string>>& dati);
+
+/**
+ * @brief Centra un testo in una larghezza specificata.
+ *
+ * @param testo Il testo da centrare.
+ * @param larghezza La larghezza totale della cella.
+ * @return std::string Testo centrato con spazi ai lati.
+ */
+std::string centraTesto(const std::string& testo, int larghezza);
 
 
-#endif
+/**
+ * @brief Stampa una riga separatrice per la tabella.
+ *
+ * @param larghezze Vettore contenente le larghezze delle colonne.
+ *
+*/
+void stampaSeparatore(const std::vector<int>& larghezze);
+
+
+/**
+ * @brief Stampa una tabella con i dati forniti.
+ *
+ * @tparam Args Tipi dei dati (deve essere un vettore bidimensionale definito come std::vector<std::string>).
+ * @param righe Righe della tabella da stampare.
+ */
+template <typename... Args>
+void stampaTabella(Args... righe) {
+    std::vector<std::vector<std::string>> dati = { righe... };
+
+    if (dati.empty())
+        return;
+
+    std::vector<int> larghezze = calcolaLarghezze(dati);
+
+    stampaSeparatore(larghezze);
+
+    for (size_t r = 0; r < dati.size(); r++) {
+        for (size_t i = 0; i < dati[r].size(); i++) {
+            std::cout << "| " << std::setw(larghezze[i]) << std::left
+                << centraTesto(dati[r][i], larghezze[i]) << " ";
+        }
+        std::cout << "|\n";
+
+        if (r == 0) { // Dopo l'intestazione, stampa il separatore
+            stampaSeparatore(larghezze);
+        }
+    }
+
+    stampaSeparatore(larghezze);
+}
+
+#endif // UTILS_HPP

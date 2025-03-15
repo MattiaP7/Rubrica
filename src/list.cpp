@@ -1,6 +1,57 @@
 #include "../include/list.hpp"
+#include "../include/utils.hpp"
 #include <iostream>
 #include <fstream>
+
+namespace {
+    Nodo* merge(Nodo* left, Nodo* right) {
+        if (!left) return right;
+        if (!right) return left;
+
+        if (left->contatto.get_nome() < right->contatto.get_nome()) {
+            left->next = merge(left->next, right);
+            return left;
+        }
+        else {
+            right->next = merge(left, right->next);
+            return right;
+        }
+    }
+
+    void split(Nodo* head, Nodo** left, Nodo** right) {
+        if (!head || !head->next) {
+            *left = head;
+            *right = nullptr;
+            return;
+        }
+
+        Nodo* slow = head;
+        Nodo* fast = head->next;
+
+        while (fast && fast->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+
+        *left = head;
+        *right = slow->next;
+        slow->next = nullptr;
+    }
+
+    Nodo* merge_sort(Nodo* head) {
+        if (!head || !head->next) return head;
+
+        Nodo* left;
+        Nodo* right;
+        split(head, &left, &right);
+
+        left = merge_sort(left);
+        right = merge_sort(right);
+
+        return merge(left, right);
+    }
+}
 
 Nodo::Nodo() : next(nullptr) {}
 
@@ -68,14 +119,46 @@ void List::push() {
 }
 
 void List::mostra() const {
+    //FIXME   se si della linee di codice commentate togliete i commenti 
+    //          verrà stampata la lettere iniziale del contatto dopo il sort() 
+
+    if (!head) {
+        std::cout << "La rubrica è vuota.\n";
+        return;
+    }
+
+    const_cast<List*>(this)->sort();
+
+    std::vector<std::vector<std::string>> dati;
+    dati.push_back({ "Nome", "Telefono", "Email" }); // Intestazione della tabella
+
     Nodo* temp = head;
+    //char letteraCorrente = '\0'; // Iniziale attuale
+
     while (temp) {
-        temp->contatto.print();
+        //char primaLettera = std::toupper(temp->contatto.get_nome()[0]);
+
+        /*if (primaLettera != letteraCorrente) {
+            if (letteraCorrente != '\0') dati.push_back({ "", "", "" });
+            dati.push_back({ std::string(1, primaLettera), "", "" });
+            letteraCorrente = primaLettera;
+        }*/
+
+        dati.push_back({ temp->contatto.get_nome(), temp->contatto.get_telefono(), temp->contatto.get_email() });
+
         temp = temp->next;
     }
+
+    stampaTabella(dati);
 }
 
+
+
 void List::find() const {
+    //TODO: si potrebbe ottimizzare usando una ricerca binaria 
+    //      bisogna chiamare sort() 
+    //      trasformare la lista di Nodo* in un std::vector per utilizzare gli indici...
+
     std::string nome_completo;
     std::cout << "Nome da cercare: ";
     std::getline(std::cin, nome_completo);
@@ -97,6 +180,9 @@ void List::find() const {
     }
 }
 
+void List::sort() {
+    head = merge_sort(head);
+}
 
 void List::erase() {
     std::string nome;
@@ -157,7 +243,7 @@ constexpr size_t List::get_size() { return M_size; }
 
 void List::modifica() {
     std::string nome;
-    Nodo* temp = nullptr;
+    Nodo* tmp = nullptr;
 
     do {
         std::cout << "Nome del contatto da modificare (0 per annullare): ";
@@ -168,15 +254,15 @@ void List::modifica() {
             return;
         }
 
-        temp = head;
-        while (temp) {
-            if (temp->contatto.get_nome() == nome) {
-                temp->contatto.modifica();
+        tmp = head;
+        while (tmp) {
+            if (tmp->contatto.get_nome() == nome) {
+                tmp->contatto.modifica();
                 salva_su_file();
                 std::cout << "Contatto modificato con successo e salvato su file.\n";
                 return;
             }
-            temp = temp->next;
+            tmp = tmp->next;
         }
 
         std::cout << "Contatto non trovato. Riprova.\n";
@@ -187,10 +273,10 @@ void List::modifica() {
 
 void List::salva_su_file() const {
     std::ofstream file("contatti.csv");
-    Nodo* temp = head;
-    while (temp) {
-        file << temp->contatto.to_csv() << "\n";
-        temp = temp->next;
+    Nodo* tmp = head;
+    while (tmp) {
+        file << tmp->contatto.to_csv() << "\n";
+        tmp = tmp->next;
     }
 }
 
