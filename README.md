@@ -17,7 +17,7 @@ Supporta operazioni come **aggiunta, rimozione, modifica, ricerca, ordinamento, 
 1️⃣ **Clona la repository**
 
 ```sh
-git clone https://github.com/tuo-username/rubrica-cpp.git
+git clone https://github.com/MattiaP7/Rubrica.git
 cd rubrica-cpp
 ```
 
