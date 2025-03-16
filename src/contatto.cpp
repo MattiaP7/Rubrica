@@ -63,7 +63,7 @@ void Contatto::inserisci() {
 }
 
 void Contatto::print() const {
-    std::cout << "Nome: " << nome_completo << "\t| Telefono: " << telefono << "\t| Email: " << email << '\n';
+    std::cout << nome_completo << "\t| " << telefono << "\t| " << email << '\n';
 }
 
 

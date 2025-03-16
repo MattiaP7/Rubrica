@@ -64,7 +64,7 @@ public:
     void mostra() const;
 
     /**
-     * @brief Cerca contti nella rubrica, tramite questo metodo basta inserire anche solo la lettera iniziale e tutti contatti con quella corrispondenza verranno stampati
+     * @brief Cerca contti nella rubrica, troverà tutti i contatti che inziano con la query MA ANCHE tutti i contatti che contengono la query 
      */
     void find() const;
 

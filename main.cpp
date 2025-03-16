@@ -5,7 +5,7 @@ int main() {
 
   Rubrica rubrica;
   rubrica.Applicazione();
-
+  
   system("pause > nul");
   return 0;
 }

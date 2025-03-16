@@ -56,18 +56,19 @@ make
 
 - [ ] **Interfaccia grafica** con una semplice GUI (Qt, ImGui, o Ncurses)
 - [ ] **Supporto alla ricerca fuzzy** (trova contatti anche se il nome non è esatto)
-- [ ] **Esportazione in formato JSON** oltre a CSV
-- [ ] **Caricamento e salvataggio automatico** senza bisogno di conferma
-- [ ] **Possibilità di aggiungere note e tag** ai contatti
+  <!-- - [ ] **Esportazione in formato JSON** oltre a CSV -->
+  <!-- - [ ] **Caricamento e salvataggio automatico** senza bisogno di conferma -->
+  <!-- - [ ] **Possibilità di aggiungere note e tag** ai contatti -->
 
 ## 🔹 Extra (sperimentali)
 
-- [ ] **Implementare un AVL Tree** al posto della lista concatenata per velocizzare ricerca e ordinamento
-- [ ] **Ridurre il consumo di memoria** con un'allocazione più efficiente dei nodi
-- [ ] **Supportare multi-threading** per operazioni lunghe come import/export
-- [ ] **Versione Web con backend in C++** (CGI, FastCGI o WebSockets)
-- [ ] **Integrazione con Telegram bot** per aggiungere contatti direttamente via chat
+<!-- - [ ] **Implementare un AVL Tree** al posto della lista concatenata per velocizzare ricerca e ordinamento -->
+
+- [ ] **Ridurre il consumo di memoria** con un'allocazione più efficiente dei nodi, tramite std::unique_ptr
+  <!-- - [ ] **Supportare multi-threading** per operazioni lunghe come import/export -->
+  <!-- - [ ] **Versione Web con backend in C++** (CGI, FastCGI o WebSockets) -->
+  <!-- - [ ] **Integrazione con Telegram bot** per aggiungere contatti direttamente via chat -->
 - [ ] **Modalità "CLI avanzata"** con autocomplete e comandi rapidi
-- [ ] **Sincronizzazione con Google Contacts** via API
+<!-- - [ ] **Sincronizzazione con Google Contacts** via API -->
 
 💡 Se hai idee o vuoi contribuire, apri una issue nella repo GitHub! 🚀

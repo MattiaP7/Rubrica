@@ -66,4 +66,5 @@ void stampaTabella(Args... righe) {
     stampaSeparatore(larghezze);
 }
 
+
 #endif // UTILS_HPP

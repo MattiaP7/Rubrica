@@ -1,4 +1,5 @@
 #include "../include/utils.hpp"
+#include <algorithm>
 #include <iomanip>
 #include <iostream>
 
@@ -27,3 +28,4 @@ void stampaSeparatore(const std::vector<int>& larghezze) {
     }
     std::cout << "+\n";
 }
+

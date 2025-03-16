@@ -1,5 +1,6 @@
 #include "../include/list.hpp"
 #include "../include/utils.hpp"
+#include <algorithm>
 #include <iostream>
 #include <fstream>
 
@@ -8,11 +9,11 @@ namespace {
         if (!left) return right;
         if (!right) return left;
 
+
         if (left->contatto.get_nome() < right->contatto.get_nome()) {
             left->next = merge(left->next, right);
             return left;
-        }
-        else {
+        } else {
             right->next = merge(left, right->next);
             return right;
         }
@@ -32,7 +33,6 @@ namespace {
             slow = slow->next;
             fast = fast->next->next;
         }
-
 
         *left = head;
         *right = slow->next;
@@ -155,35 +155,6 @@ void List::mostra() const {
 
 
 void List::find() const {
-    //TODO: si potrebbe ottimizzare usando una ricerca binaria 
-    //      bisogna chiamare sort() 
-    //      trasformare la lista di Nodo* in un std::vector per utilizzare gli indici...
-
-    /* Questa è la ricerca per nome esatto
-
-    std::string nome_completo;
-    std::cout << "Nome da cercare: ";
-    std::getline(std::cin, nome_completo);
-
-    Nodo* tmp = head;
-    bool trovato = false;
-
-    while (tmp) {
-        if (tmp->contatto.get_nome() == nome_completo) {
-            tmp->contatto.print();
-            trovato = true;
-            break;
-        }
-        tmp = tmp->next;
-    }
-
-    if (!trovato) {
-        std::cout << "Contatto non trovato\n";
-    }
-    */
-
-    // ricerca per prefisso, ovvero tutti i nomi che iniziano con una certa sequenza di caratteri
-
     if (!head) {
         std::cerr << "La rubrica è vuota.\n";
         return;
@@ -194,37 +165,32 @@ void List::find() const {
     std::string prefix;
     std::cout << "Cerca: ";
     std::getline(std::cin, prefix);
+    
+    std::string prefix_lower = prefix;
+    std::transform(prefix_lower.begin(), prefix_lower.end(), prefix_lower.begin(), ::tolower);
 
-    Nodo* tmp = head;
+    Nodo* curr = head;
     bool found = false;
 
-    while (tmp) {
-        // Verfica se il nome inzia con il prefix
-        if (tmp->contatto.get_nome().rfind(prefix, 0) == 0) {
-            tmp->contatto.print();
+    while(curr){
+        std::string nome = curr->contatto.get_nome();
+        std::string nome_lower = nome;
+        std::transform(nome_lower.begin(), nome_lower.end(), nome_lower.begin(), ::tolower);
+
+        if(nome_lower.find(prefix_lower) == 0 || nome_lower.find(prefix_lower) != std::string::npos){
+            curr->contatto.print();
             found = true;
         }
-        tmp = tmp->next;
+        
+        curr = curr->next;
     }
 
-    if (!found) {
-        std::cerr << "Nessun contatto trovato...\n";
+    if(!found){
+        std::cout << "Nessun contatto trovato con '" << prefix << "'\n";
     }
-
 }
 
 void List::sort() {
-    //TODO aggiungere la possibilità di ordinare la rubrica per nome oppure telefono o email
-
-
-    /*
-    int scelta;
-    do
-    {
-
-    } while (scelta != 0); */
-
-
     head = merge_sort(head);
 }
 
