@@ -64,9 +64,7 @@ public:
     void mostra() const;
 
     /**
-     * @brief Cerca un contatto nella rubrica per nome.
-     *
-     * Se il contatto viene trovato, i suoi dati vengono stampati a schermo.
+     * @brief Cerca contti nella rubrica, tramite questo metodo basta inserire anche solo la lettera iniziale e tutti contatti con quella corrispondenza verranno stampati
      */
     void find() const;
 

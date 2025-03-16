@@ -159,6 +159,8 @@ void List::find() const {
     //      bisogna chiamare sort() 
     //      trasformare la lista di Nodo* in un std::vector per utilizzare gli indici...
 
+    /* Questa è la ricerca per nome esatto
+
     std::string nome_completo;
     std::cout << "Nome da cercare: ";
     std::getline(std::cin, nome_completo);
@@ -178,9 +180,51 @@ void List::find() const {
     if (!trovato) {
         std::cout << "Contatto non trovato\n";
     }
+    */
+
+    // ricerca per prefisso, ovvero tutti i nomi che iniziano con una certa sequenza di caratteri
+
+    if (!head) {
+        std::cerr << "La rubrica è vuota.\n";
+        return;
+    }
+
+    const_cast<List*>(this)->sort();
+
+    std::string prefix;
+    std::cout << "Cerca: ";
+    std::getline(std::cin, prefix);
+
+    Nodo* tmp = head;
+    bool found = false;
+
+    while (tmp) {
+        // Verfica se il nome inzia con il prefix
+        if (tmp->contatto.get_nome().rfind(prefix, 0) == 0) {
+            tmp->contatto.print();
+            found = true;
+        }
+        tmp = tmp->next;
+    }
+
+    if (!found) {
+        std::cerr << "Nessun contatto trovato...\n";
+    }
+
 }
 
 void List::sort() {
+    //TODO aggiungere la possibilità di ordinare la rubrica per nome oppure telefono o email
+
+
+    /*
+    int scelta;
+    do
+    {
+
+    } while (scelta != 0); */
+
+
     head = merge_sort(head);
 }
 
