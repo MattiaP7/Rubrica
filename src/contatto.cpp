@@ -35,11 +35,7 @@ namespace {
     }
 }
 
-Contatto::Contatto() :
-    nome_completo(""),
-    telefono(""),
-    email("") {
-}
+Contatto::Contatto() : nome_completo(""), telefono(""), email("") {}
 
 void Contatto::inserisci() {
     std::cout << "Inserisci il nome completo: ";
@@ -62,9 +58,7 @@ void Contatto::inserisci() {
     } while (!valid_email);
 }
 
-void Contatto::print() const {
-    std::cout << nome_completo << "\t| " << telefono << "\t| " << email << '\n';
-}
+void Contatto::print() const { std::cout << nome_completo << "\t| " << telefono << "\t| " << email << '\n'; }
 
 
 void Contatto::modifica() {
@@ -111,13 +105,11 @@ void Contatto::modifica() {
 
 }
 
-const std::string& Contatto::get_nome() const { return nome_completo; }
-const std::string& Contatto::get_telefono() const { return telefono; }
-const std::string& Contatto::get_email() const { return email; }
+const std::string& Contatto::get_nome()     const       { return nome_completo; }
+const std::string& Contatto::get_telefono() const       { return telefono; }
+const std::string& Contatto::get_email()    const       { return email; }
 
-std::string Contatto::to_csv() const {
-    return nome_completo + "," + telefono + "," + email;
-}
+std::string Contatto::to_csv() const { return nome_completo + "," + telefono + "," + email; }
 
 void Contatto::from_csv(const std::string& line) {
     std::stringstream ss(line);

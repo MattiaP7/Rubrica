@@ -86,6 +86,13 @@ public:
      */
     constexpr size_t get_size();
 
+    /**
+     * @brief Verifica che la lista sia vuota
+     * 
+     * @return true se la lista possiede 0 nodi
+     * @return false se la lista ha nodi
+     */
+    constexpr bool empty();
 
     /**
      * @brief Ordina i contatti nella rubrica in ordine alfabetico per nome.

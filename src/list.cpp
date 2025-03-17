@@ -1,6 +1,5 @@
 #include "../include/list.hpp"
 #include "../include/utils.hpp"
-#include <algorithm>
 #include <iostream>
 #include <fstream>
 
@@ -55,9 +54,7 @@ namespace {
 
 Nodo::Nodo() : next(nullptr) {}
 
-List::List() : head(nullptr), M_size(0) {
-    carica_da_file();
-}
+List::List() : head(nullptr), M_size(0) { carica_da_file(); }
 
 List::~List() {
     Nodo* tmp;
@@ -119,9 +116,6 @@ void List::push() {
 }
 
 void List::mostra() const {
-    //FIXME   se si della linee di codice commentate togliete i commenti 
-    //          verrà stampata la lettere iniziale del contatto dopo il sort() 
-
     if (!head) {
         std::cout << "La rubrica è vuota.\n";
         return;
@@ -166,27 +160,20 @@ void List::find() const {
     std::cout << "Cerca: ";
     std::getline(std::cin, prefix);
     
-    std::string prefix_lower = prefix;
-    std::transform(prefix_lower.begin(), prefix_lower.end(), prefix_lower.begin(), ::tolower);
-
-    Nodo* curr = head;
+    Nodo* tmp = head;
     bool found = false;
 
-    while(curr){
-        std::string nome = curr->contatto.get_nome();
-        std::string nome_lower = nome;
-        std::transform(nome_lower.begin(), nome_lower.end(), nome_lower.begin(), ::tolower);
-
-        if(nome_lower.find(prefix_lower) == 0 || nome_lower.find(prefix_lower) != std::string::npos){
-            curr->contatto.print();
+    while(tmp){
+        // Verfica se il nome inzia con il prefix
+        if(tmp->contatto.get_nome().rfind(prefix, 0) == 0){
+            tmp->contatto.print();
             found = true;
         }
-        
-        curr = curr->next;
+        tmp = tmp->next;
     }
 
     if(!found){
-        std::cout << "Nessun contatto trovato con '" << prefix << "'\n";
+        std::cout << "Nessun contatto trovato";
     }
 }
 
@@ -251,6 +238,8 @@ void List::unique() {
 
 constexpr size_t List::get_size() { return M_size; }
 
+constexpr bool List::empty(){ return this->head == nullptr; }
+
 void List::modifica() {
     std::string nome;
     Nodo* tmp = nullptr;
@@ -284,6 +273,7 @@ void List::modifica() {
 void List::salva_su_file() const {
     std::ofstream file("contatti.csv");
     Nodo* tmp = head;
+    
     while (tmp) {
         file << tmp->contatto.to_csv() << "\n";
         tmp = tmp->next;
