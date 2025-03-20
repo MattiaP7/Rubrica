@@ -1,4 +1,4 @@
-#include "../include/rubrica.hpp"
+#include "include/rubrica.hpp"
 #include <iostream>
 
 void Rubrica::Applicazione() {
@@ -16,13 +16,29 @@ void Rubrica::Applicazione() {
         std::cin.ignore();
 
         switch (scelta) {
-        case 1: lista.push(); break;
-        case 2: lista.mostra(); break;
-        case 3: lista.find(); break;
-        case 4: lista.modifica(); break;
-        case 5: lista.erase(); break;
-        case 0: std::cout << "Uscita...\n"; break;
-        default: if (scelta != 0) { std::cout << "Scelta non valida.\n"; } break;
+        case 1: 
+            lista.push();
+            break;
+        case 2: 
+            lista.mostra();
+            break;
+        case 3: 
+            lista.find();
+            break;
+        case 4: 
+            lista.modifica();
+            break;
+        case 5: 
+            lista.erase();
+            break;
+        case 0: 
+            std::cout << "Uscita...\n"; 
+            std::exit(1);
+        default: 
+            if (scelta != 0) { 
+                std::cout << "Scelta non valida.\n"; 
+            } 
+            break;
         }
     } while (scelta != 0);
 }

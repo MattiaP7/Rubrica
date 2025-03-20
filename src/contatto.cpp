@@ -1,5 +1,4 @@
-#include "../include/contatto.hpp"
-//#include "../include/utils.hpp"
+#include "include/contatto.hpp"
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -37,12 +36,25 @@ namespace {
 
 Contatto::Contatto() : nome_completo(""), telefono(""), email("") {}
 
+Contatto::Contatto(std::string nome_completo, std::string telefono, std::string email) : nome_completo(nome_completo), telefono(telefono), email(email) {}
+
 void Contatto::inserisci() {
     std::cout << "Inserisci il nome completo: ";
     std::getline(std::cin, nome_completo);
 
-    std::cout << "Inserisci il numero telefonico: ";
-    std::getline(std::cin, telefono);
+
+    bool valid_phone = false;
+    do {
+        std::cout << "Inserisci il numero telefonico: ";
+        std::getline(std::cin, telefono);
+
+        if(this->telefono.size() < 10){
+            valid_phone = false;
+            std::cout << "Per favore inserisci un numero di telefono a 10 cifre\n";
+        }else{
+            valid_phone = true;
+        }
+    }while (!valid_phone);
 
 
     bool valid_email = false;
@@ -105,9 +117,9 @@ void Contatto::modifica() {
 
 }
 
-const std::string& Contatto::get_nome()     const       { return nome_completo; }
-const std::string& Contatto::get_telefono() const       { return telefono; }
-const std::string& Contatto::get_email()    const       { return email; }
+const std::string& Contatto::get_nome()     const   { return nome_completo; }
+const std::string& Contatto::get_telefono() const   { return telefono; }
+const std::string& Contatto::get_email()    const   { return email; }
 
 std::string Contatto::to_csv() const { return nome_completo + "," + telefono + "," + email; }
 

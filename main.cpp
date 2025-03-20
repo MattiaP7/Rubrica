@@ -1,4 +1,4 @@
-#include "include/rubrica.hpp"
+#include "src/include/rubrica.hpp"
 
 int main() {
   system("chcp 65001 > nul");

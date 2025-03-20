@@ -22,11 +22,13 @@ cd rubrica-cpp
 ```
 
 2️⃣ **Compila e esegui il progetto**
+
 ```sh
 make
 .\main
 ```
-Consiglio di installare make.
+
+Altrimenti visita la pagina [release](https://github.com/MattiaP7/Rubrica/releases).
 
 ### 📂 Struttura della repository
 
@@ -49,23 +51,17 @@ Consiglio di installare make.
 
 # ✅ TODO: Miglioramenti e funzionalità future
 
-## 🔹 Funzionalità principali da implementare:
-
+- [x] **Sistemare la funzione di ricerca**
 - [ ] **Interfaccia grafica** con una semplice GUI (Qt, ImGui, o Ncurses)
+- [ ] **Ridurre il consumo di memoria** con un'allocazione più efficiente dei nodi, tramite std::unique_ptr
   <!-- - [ ] **Esportazione in formato JSON** oltre a CSV -->
   <!-- - [ ] **Caricamento e salvataggio automatico** senza bisogno di conferma -->
   <!-- - [ ] **Possibilità di aggiungere note e tag** ai contatti -->
-
-## 🔹 Extra (sperimentali)
-
-- [ ] **Supporto alla ricerca fuzzy** (trova contatti anche se il nome non è esatto)
-- [ ] **Ridurre il consumo di memoria** con un'allocazione più efficiente dei nodi, tramite std::unique_ptr
-
-<!-- - [ ] **Implementare un AVL Tree** al posto della lista concatenata per velocizzare ricerca e ordinamento -->
-<!-- - [ ] **Modalità "CLI avanzata"** con autocomplete e comandi rapidi -->
-<!-- - [ ] **Supportare multi-threading** per operazioni lunghe come import/export -->
-<!-- - [ ] **Versione Web con backend in C++** (CGI, FastCGI o WebSockets) -->
-<!-- - [ ] **Integrazione con Telegram bot** per aggiungere contatti direttamente via chat -->
-<!-- - [ ] **Sincronizzazione con Google Contacts** via API -->
+  <!-- - [ ] **Implementare un AVL Tree** al posto della lista concatenata per velocizzare ricerca e ordinamento -->
+  <!-- - [ ] **Modalità "CLI avanzata"** con autocomplete e comandi rapidi -->
+  <!-- - [ ] **Supportare multi-threading** per operazioni lunghe come import/export -->
+  <!-- - [ ] **Versione Web con backend in C++** (CGI, FastCGI o WebSockets) -->
+  <!-- - [ ] **Integrazione con Telegram bot** per aggiungere contatti direttamente via chat -->
+  <!-- - [ ] **Sincronizzazione con Google Contacts** via API -->
 
 💡 Se hai idee o vuoi contribuire, apri una issue nella repo GitHub! 🚀

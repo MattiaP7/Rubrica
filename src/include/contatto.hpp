@@ -20,6 +20,8 @@ public:
      */
     Contatto();
 
+    Contatto(std::string nome_completo, std::string telefono, std::string email);
+
     /**
      * @brief Metodo per inserire i dati del contatto tramite input utente.
      */

@@ -1,8 +1,6 @@
-#include "../include/utils.hpp"
+#include "include/utils.hpp"
 #include <algorithm>
-#include <iomanip>
 #include <iostream>
-
 
 std::vector<int> calcolaLarghezze(const std::vector<std::vector<std::string>>& dati) {
     size_t colonne = dati[0].size();
@@ -29,3 +27,8 @@ void stampaSeparatore(const std::vector<int>& larghezze) {
     std::cout << "+\n";
 }
 
+std::string to_lower(const std::string& str) {
+    std::string lowerStr = str;
+    std::transform(lowerStr.begin(), lowerStr.end(), lowerStr.begin(), ::tolower);
+    return lowerStr;
+}

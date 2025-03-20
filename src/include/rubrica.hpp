@@ -10,7 +10,7 @@
 class Rubrica {
 private:
     List lista; ///< Lista che contiene i contatti della rubrica
-
+    
 public:
     /**
      * @brief Avvia l'applicazione della rubrica.

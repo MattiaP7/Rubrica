@@ -26,8 +26,8 @@ struct Nodo {
  */
 class List {
 private:
-    Nodo* head; ///< Puntatore alla testa della lista
-    size_t M_size = 0; ///< Numero di elementi presenti nella lista
+    Nodo* head;         ///< Puntatore alla testa della lista
+    size_t M_size = 0;  ///< Numero di elementi presenti nella lista
 
     /**
      * @brief Salva i dati della lista su un file CSV.
@@ -52,9 +52,7 @@ public:
     ~List();
 
     /**
-     * @brief Inserisce un nuovo contatto nella lista in ordine alfabetico.
-     *
-     * Se il contatto esiste già, non viene inserito.
+     * @brief Inserisce un nuovo contatto nella lista, viene fatto un inserimento in testa per poi fare una chiamata alla funzione `List::sort()` per ordinare in ordine alfabetico, se il contatto esiste già, non verrà inserito.
      */
     void push();
 
@@ -95,7 +93,7 @@ public:
     constexpr bool empty();
 
     /**
-     * @brief Ordina i contatti nella rubrica in ordine alfabetico per nome.
+     * @brief Ordina i contatti nella rubrica in ordine alfabetico.
      */
     void sort();
 
@@ -113,3 +111,5 @@ public:
 };
 
 #endif // LISTA_HPP
+
+

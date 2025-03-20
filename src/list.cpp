@@ -1,9 +1,25 @@
-#include "../include/list.hpp"
-#include "../include/utils.hpp"
+#include "include/list.hpp"
+#include "include/utils.hpp"
+#include <cctype>
+#include <cstring>
 #include <iostream>
 #include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
 
+/**
+ * @brief questo namespace omonimo contiene funzioni utility per QUESTO file, motivo per cui sono definiti qua e non nel file utils.hpp
+ * 
+ */
 namespace {
+    /**
+     * @brief Unisce due liste ordinate in una singola lista ordinata.
+     * 
+     * @param left Puntatore alla testa della prima lista ordinata.
+     * @param right Puntatore alla testa della seconda lista ordinata.
+     * @return Nodo* Puntatore alla testa della lista risultante ordinata.
+     */
     Nodo* merge(Nodo* left, Nodo* right) {
         if (!left) return right;
         if (!right) return left;
@@ -18,6 +34,13 @@ namespace {
         }
     }
 
+    /**
+     * @brief Divide una lista in due sottoliste di dimensione simile.
+     * 
+     * @param head Puntatore alla testa della lista da dividere.
+     * @param left Puntatore al puntatore che riceverà la testa della prima metà.
+     * @param right Puntatore al puntatore che riceverà la testa della seconda metà.
+     */
     void split(Nodo* head, Nodo** left, Nodo** right) {
         if (!head || !head->next) {
             *left = head;
@@ -38,6 +61,12 @@ namespace {
         slow->next = nullptr;
     }
 
+    /**
+     * @brief Ordina una lista collegata utilizzando Merge Sort.
+     * 
+     * @param head Puntatore alla testa della lista da ordinare.
+     * @return Nodo* Puntatore alla testa della lista ordinata.
+     */
     Nodo* merge_sort(Nodo* head) {
         if (!head || !head->next) return head;
 
@@ -49,6 +78,27 @@ namespace {
         right = merge_sort(right);
 
         return merge(left, right);
+    }
+
+
+    /**
+     * @brief funzione che verifica se una stringa inizia con un'altra stringa 
+     * 
+     * @param str stringa su cui fare il controllo
+     * @param prefix stringa per fare il controllo
+     * @return true 
+     * @return false 
+     */
+    bool starts_with(const std::string& str, const std::string& prefix) {
+        if (str.size() < prefix.size()) return false;
+
+        for (size_t i = 0; i < prefix.size(); ++i) {
+            if (std::tolower(str[i]) != std::tolower(prefix[i])) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
 
@@ -73,6 +123,7 @@ void List::push() {
         std::cerr << "ERRORE: memoria insufficiente!\n";
         return;
     }
+    
 
 
     new_node->contatto.inserisci();
@@ -84,7 +135,7 @@ void List::push() {
             tmp->contatto.get_nome() == new_node->contatto.get_nome() &&
             tmp->contatto.get_telefono() == new_node->contatto.get_telefono() &&
             tmp->contatto.get_email() == new_node->contatto.get_email()
-            ) {
+        ) {
             delete new_node;
             return;
         }
@@ -92,20 +143,8 @@ void List::push() {
     }
 
 
-    // facciamo un inserimento ordinato
-    if (!head || head->contatto.get_nome() > new_node->contatto.get_nome()) {
-        new_node->next = head;
-        head = new_node;
-    }
-    else {
-        Nodo* current = head;
-        while (current->next && current->next->contatto.get_nome() < new_node->contatto.get_nome()) {
-            current = current->next;
-        }
-        new_node->next = current->next;
-        current->next = new_node;
-    }
-
+    new_node->next = head;
+    head = new_node;
 
     M_size++;
     salva_su_file();
@@ -113,6 +152,8 @@ void List::push() {
     if (M_size > 1) {
         this->unique();
     }
+
+    const_cast<List*>(this)->sort();
 }
 
 void List::mostra() const {
@@ -147,7 +188,6 @@ void List::mostra() const {
 }
 
 
-
 void List::find() const {
     if (!head) {
         std::cerr << "La rubrica è vuota.\n";
@@ -156,21 +196,29 @@ void List::find() const {
 
     const_cast<List*>(this)->sort();
 
-    std::string prefix;
+    std::string element;
     std::cout << "Cerca: ";
-    std::getline(std::cin, prefix);
+    std::getline(std::cin, element);
     
-    Nodo* tmp = head;
     bool found = false;
+    Nodo* curr = head;
 
-    while(tmp){
-        // Verfica se il nome inzia con il prefix
-        if(tmp->contatto.get_nome().rfind(prefix, 0) == 0){
-            tmp->contatto.print();
-            found = true;
+    while (curr) {
+        std::istringstream stream(curr->contatto.get_nome());
+        std::string word;
+
+        // Verifica se una parola inizia con la stringa cercata (case-insensitive)
+        while (stream >> word) {
+            if (starts_with(word, element)) {
+                curr->contatto.print();
+                found = true;
+                break; 
+            }
         }
-        tmp = tmp->next;
+
+        curr = curr->next;
     }
+    
 
     if(!found){
         std::cout << "Nessun contatto trovato";

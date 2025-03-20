@@ -26,6 +26,14 @@ std::string centraTesto(const std::string& testo, int larghezza);
 
 
 /**
+ * @brief Funzione utility che data una stringa la trasforma in lowercase, utilizzata per la funzione List::find()
+ * 
+ * @param str Stringa da modificare
+ * @return std::string  Stringa stessa ma in lower case
+ */
+std::string to_lower(const std::string& str);
+
+/**
  * @brief Stampa una riga separatrice per la tabella.
  *
  * @param larghezze Vettore contenente le larghezze delle colonne.
