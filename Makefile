@@ -1,7 +1,7 @@
 # semplice file Make
 
 CXX = g++
-CXXFLAGS = -std=c++20 -Wall -Wextra -O1
+CXXFLAGS = -std=c++17 -Wall -Wextra -O1
 SRC = main.cpp src/contatto.cpp src/list.cpp src/rubrica.cpp src/utils.cpp
 TARGET = main
 

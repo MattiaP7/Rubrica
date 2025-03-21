@@ -16,10 +16,10 @@ void Rubrica::Applicazione() {
         std::cin.ignore();
 
         switch (scelta) {
-        case 1: 
+        case 1 :
             lista.push();
             break;
-        case 2: 
+        case 2:
             lista.mostra();
             break;
         case 3: 

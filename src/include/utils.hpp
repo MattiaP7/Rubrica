@@ -11,7 +11,7 @@
  * @brief Calcola la larghezza delle colonne in base ai dati passati.
  *
  * @param dati Vettore bidimensionale contenente i dati(in stringa) della tabella.
- * @return std::vector<int> Vettore contenente la larghezza di ciascuna colonna.
+ * @return `std::vector<int>` Vettore contenente la larghezza di ciascuna colonna.
  */
 std::vector<int> calcolaLarghezze(const std::vector<std::vector<std::string>>& dati);
 
@@ -20,7 +20,7 @@ std::vector<int> calcolaLarghezze(const std::vector<std::vector<std::string>>& d
  *
  * @param testo Il testo da centrare.
  * @param larghezza La larghezza totale della cella.
- * @return std::string Testo centrato con spazi ai lati.
+ * @return `std::string` Testo centrato con spazi ai lati.
  */
 std::string centraTesto(const std::string& testo, int larghezza);
 
@@ -29,7 +29,7 @@ std::string centraTesto(const std::string& testo, int larghezza);
  * @brief Funzione utility che data una stringa la trasforma in lowercase, utilizzata per la funzione List::find()
  * 
  * @param str Stringa da modificare
- * @return std::string  Stringa stessa ma in lower case
+ * @return `std::string`  Stringa stessa ma in lower case
  */
 std::string to_lower(const std::string& str);
 

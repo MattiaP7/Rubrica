@@ -3,6 +3,14 @@
 
 #pragma once
 #include "contatto.hpp"
+#include "utils.hpp"
+#include <cctype>
+#include <cstring>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
 
 /**
  * @struct Nodo
@@ -64,7 +72,8 @@ public:
     /**
      * @brief Cerca contti nella rubrica, troverà tutti i contatti che inziano con la query MA ANCHE tutti i contatti che contengono la query 
      */
-    void find() const;
+    std::vector<Nodo*> find() const;
+
 
     /**
      * @brief Elimina un contatto dalla rubrica.
@@ -80,15 +89,15 @@ public:
 
     /**
      * @brief Restituisce il numero di contatti presenti nella lista.
-     * @return size_t Numero di elementi nella lista.
+     * @return `size_t` Numero di elementi nella lista.
      */
     constexpr size_t get_size();
 
     /**
      * @brief Verifica che la lista sia vuota
      * 
-     * @return true se la lista possiede 0 nodi
-     * @return false se la lista ha nodi
+     * @return `true` se la lista possiede 0 nodi
+     * @return `false` se la lista ha nodi
      */
     constexpr bool empty();
 

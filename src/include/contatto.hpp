@@ -39,25 +39,25 @@ public:
 
     /**
      * @brief Restituisce il nome completo del contatto.
-     * @return const std::string& Nome del contatto.
+     * @return `const std::string&` Nome del contatto.
      */
     const std::string& get_nome() const;
 
     /**
      * @brief Restituisce il numero di telefono del contatto.
-     * @return const std::string& Numero di telefono.
+     * @return `const std::string&` Numero di telefono.
      */
     const std::string& get_telefono() const;
 
     /**
      * @brief Restituisce l'indirizzo email del contatto.
-     * @return const std::string& Indirizzo email.
+     * @return `const std::string&` Indirizzo email.
      */
     const std::string& get_email() const;
 
     /**
      * @brief Converte i dati del contatto in formato CSV (stringa separata da virgole).
-     * @return std::string Rappresentazione CSV del contatto.
+     * @return `std::string` Rappresentazione CSV del contatto.
      */
     std::string to_csv() const;
 

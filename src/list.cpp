@@ -1,12 +1,4 @@
 #include "include/list.hpp"
-#include "include/utils.hpp"
-#include <cctype>
-#include <cstring>
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <vector>
 
 /**
  * @brief questo namespace omonimo contiene funzioni utility per QUESTO file, motivo per cui sono definiti qua e non nel file utils.hpp
@@ -18,7 +10,7 @@ namespace {
      * 
      * @param left Puntatore alla testa della prima lista ordinata.
      * @param right Puntatore alla testa della seconda lista ordinata.
-     * @return Nodo* Puntatore alla testa della lista risultante ordinata.
+     * @return `Nodo*` Puntatore alla testa della lista risultante ordinata.
      */
     Nodo* merge(Nodo* left, Nodo* right) {
         if (!left) return right;
@@ -65,7 +57,7 @@ namespace {
      * @brief Ordina una lista collegata utilizzando Merge Sort.
      * 
      * @param head Puntatore alla testa della lista da ordinare.
-     * @return Nodo* Puntatore alla testa della lista ordinata.
+     * @return `Nodo*` Puntatore alla testa della lista ordinata.
      */
     Nodo* merge_sort(Nodo* head) {
         if (!head || !head->next) return head;
@@ -86,8 +78,8 @@ namespace {
      * 
      * @param str stringa su cui fare il controllo
      * @param prefix stringa per fare il controllo
-     * @return true 
-     * @return false 
+     * @return `true` 
+     * @return `false`
      */
     bool starts_with(const std::string& str, const std::string& prefix) {
         if (str.size() < prefix.size()) return false;
@@ -188,10 +180,10 @@ void List::mostra() const {
 }
 
 
-void List::find() const {
+std::vector<Nodo*> List::find() const {
     if (!head) {
         std::cerr << "La rubrica è vuota.\n";
-        return;
+        return std::vector<Nodo*>();
     }
 
     const_cast<List*>(this)->sort();
@@ -202,6 +194,8 @@ void List::find() const {
     
     bool found = false;
     Nodo* curr = head;
+    std::vector<Nodo*> contatti_trovati;
+    int index = 1;
 
     while (curr) {
         std::istringstream stream(curr->contatto.get_nome());
@@ -210,6 +204,8 @@ void List::find() const {
         // Verifica se una parola inizia con la stringa cercata (case-insensitive)
         while (stream >> word) {
             if (starts_with(word, element)) {
+                contatti_trovati.push_back(curr);
+                std::cout << index++ << ". ";
                 curr->contatto.print();
                 found = true;
                 break; 
@@ -223,6 +219,7 @@ void List::find() const {
     if(!found){
         std::cout << "Nessun contatto trovato";
     }
+    return contatti_trovati;
 }
 
 void List::sort() {
@@ -230,15 +227,28 @@ void List::sort() {
 }
 
 void List::erase() {
-    std::string nome;
-    std::cout << "Nome da cercare: ";
-    std::getline(std::cin, nome);
-
     if (!head) return;
 
-    if (head->contatto.get_nome() == nome) {
+    std::vector<Nodo*> lista = List::find();
+
+    int scelta;
+    std::cout << "Scegli il numero del contatto da eliminare (0 per annullare): ";
+    std::cin >> scelta;
+
+    if(scelta == 0){
+        std::cout << "Operazione annulata\n";
+        return;
+    }else if(scelta < 1 || scelta > (int)lista.size()){
+        std::cout << "Numero del contatto inesistente\n";
+        return;
+    }
+
+    Nodo* contatto_scelto = lista[scelta - 1];
+    
+    if(head == contatto_scelto){
         Nodo* tmp = head;
         head = head->next;
+        std::cout << "contatto " << tmp->contatto.get_nome() << " eliminato\n";
         delete tmp;
         --M_size;
         salva_su_file();
@@ -248,11 +258,10 @@ void List::erase() {
     Nodo* prev = nullptr;
     Nodo* curr = head;
 
-    while (curr) {
-        if (curr->contatto.get_nome() == nome) {
-            if (prev) {
-                prev->next = curr->next;
-            }
+    while(curr){
+        if(curr == contatto_scelto){
+            if(prev) prev->next = curr->next;
+            std::cout << "contatto " << curr->contatto.get_nome() << " eliminato\n";
             delete curr;
             --M_size;
             salva_su_file();

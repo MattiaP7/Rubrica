@@ -52,8 +52,9 @@ Altrimenti visita la pagina [release](https://github.com/MattiaP7/Rubrica/releas
 # ✅ TODO: Miglioramenti e funzionalità future
 
 - [x] **Sistemare la funzione di ricerca**
+- [x] **Sistema la funzione di eliminazione**
 - [ ] **Interfaccia grafica** con una semplice GUI (Qt, ImGui, o Ncurses)
-- [ ] **Ridurre il consumo di memoria** con un'allocazione più efficiente dei nodi, tramite std::unique_ptr
+- [ ] **Utilizzare smart pointer** potrebbe migliorare la efficenza della lista??
   <!-- - [ ] **Esportazione in formato JSON** oltre a CSV -->
   <!-- - [ ] **Caricamento e salvataggio automatico** senza bisogno di conferma -->
   <!-- - [ ] **Possibilità di aggiungere note e tag** ai contatti -->
